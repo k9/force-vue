@@ -3,6 +3,7 @@ import { EventEmitter } from 'events';
 import { Promise } from 'es6-promise';
 
 const personCache = Object.create(null);
+const nameList = [];
 const pictureCache = Object.create(null);
 const person = new EventEmitter();
 const personBaseUrl = 'people/';
@@ -21,6 +22,28 @@ person.fetch = id => {
       const personData = personCache[id] = response.data;
       resolve(personData);
     }, reject);
+  });
+};
+
+person.fetchAll = () =>
+  new Promise(resolve =>
+    person.fetchPage(resolve, 1));
+
+person.fetchPage = (resolve, pageNumber) => {
+  const pageToGet = `${personBaseUrl}?page=${pageNumber}`;
+  Vue.http.get(pageToGet).then(response => {
+    for (const result of response.data.results) {
+      const pathSegments = result.url.split('/');
+      const id = pathSegments[pathSegments.length - 2];
+      personCache[id] = result;
+      nameList.push(result.name);
+    }
+
+    if (response.data.next) {
+      person.fetchPage(resolve, pageNumber + 1);
+    } else {
+      resolve(nameList);
+    }
   });
 };
 

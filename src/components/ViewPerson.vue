@@ -49,7 +49,13 @@ export default {
       personImageMsg: '',
       imageShow: false,
       loading: false,
+      nameList: [],
     };
+  },
+  init() {
+    person.fetchAll().then((nameList) => {
+      this.nameList = nameList;
+    });
   },
   methods: {
     fetchRandomPerson() {
