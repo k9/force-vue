@@ -1,15 +1,18 @@
 <template>
-  <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+  <div class="mdl-card mdl-shadow--4dp portfolio-card">
     <mdl-button class="randPersonBtn" v-mdl-ripple-effect colored icon raised v-on:click="fetchRandomPerson">
-      <i class="material-icons">face</i> Random Person
+      <i class="material-icons">face</i> Random
     </mdl-button>
-    <mdl-textfield floating-label="Name" :value.sync="personData.name"></mdl-textfield>
-    <mdl-textfield floating-label="Height" :value.sync="personData.height"></mdl-textfield>
-    <mdl-textfield floating-label="Mass" :value.sync="personData.mass"></mdl-textfield>
-    <mdl-textfield floating-label="Hair Color" :value.sync="personData.hair_color"></mdl-textfield>
-    <mdl-textfield floating-label="Eye Color" :value.sync="personData.eye_color"></mdl-textfield>
-    <mdl-textfield floating-label="Birth Year" :value.sync="personData.birth_year"></mdl-textfield>
-    <mdl-textfield floating-label="Gender" :value.sync="personData.gender"></mdl-textfield>
+    <div class="mdl-card__actions">
+      <mdl-select label="Name" id="people-select" class="full-width-select"
+        :value.sync="personData.name" :options="nameList"></mdl-select>
+      <mdl-textfield floating-label="Height" :value.sync="personData.height"></mdl-textfield>
+      <mdl-textfield floating-label="Mass" :value.sync="personData.mass"></mdl-textfield>
+      <mdl-textfield floating-label="Hair Color" :value.sync="personData.hair_color"></mdl-textfield>
+      <mdl-textfield floating-label="Eye Color" :value.sync="personData.eye_color"></mdl-textfield>
+      <mdl-textfield floating-label="Birth Year" :value.sync="personData.birth_year"></mdl-textfield>
+      <mdl-textfield floating-label="Gender" :value.sync="personData.gender"></mdl-textfield>
+    </div>
   </div>
   <div class="mdl-cell mdl-card mdl-shadow--4dp">
     <figure class="mdl-card__media">
@@ -21,12 +24,13 @@
 </template>
 
 <script>
-import { MdlButton, MdlTextfield, directives } from 'vue-mdl';
+import { MdlButton, MdlTextfield, MdlSelect, directives } from 'vue-mdl';
 import person from '../api/person';
 
 export default {
   components: {
     MdlButton,
+    MdlSelect,
     MdlTextfield,
   },
   directives,
@@ -81,5 +85,8 @@ figure img {
 }
 .mdl-card__media {
   background-color: #FFF;
+}
+.full-width-select {
+  width: 100%;
 }
 </style>
