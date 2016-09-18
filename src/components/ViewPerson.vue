@@ -6,7 +6,9 @@
     <div class="mdl-card__actions">
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-dirty">
         <div>
-          <select class="full-width-select" v-model="idForName"
+          <select class="full-width-select"
+            name="person-select"
+            v-model="idForName"
             v-on:change="fetchPerson">
             <option v-for="option in nameList" v-bind:value="option.value">
               {{ option.name }}
@@ -33,13 +35,12 @@
 </template>
 
 <script>
-import { MdlButton, MdlTextfield, MdlSelect, directives } from 'vue-mdl';
+import { MdlButton, MdlTextfield, directives } from 'vue-mdl';
 import person from '../api/person';
 
 export default {
   components: {
     MdlButton,
-    MdlSelect,
     MdlTextfield,
   },
   directives,
@@ -107,7 +108,7 @@ figure img {
 }
 .full-width-select {
   width: 100%;
-  font-size: 24px;
+  font-size: 20px;
   margin: 3px -2px 8px;
 }
 </style>

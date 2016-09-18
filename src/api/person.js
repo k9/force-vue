@@ -45,6 +45,7 @@ person.fetchPage = (resolve, pageNumber) => {
     if (response.data.next) {
       person.fetchPage(resolve, pageNumber + 1);
     } else {
+      nameList.sort((a, b) => a.name.localeCompare(b.name));
       resolve(nameList);
     }
   });

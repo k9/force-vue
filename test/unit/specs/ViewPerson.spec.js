@@ -7,6 +7,13 @@ describe('ViewPerson.vue', () => {
       template: '<div><view-person></view-person></div>',
       components: { ViewPerson },
     }).$mount();
-    expect(vm.$el.querySelector('.randPersonBtn').textContent).to.contain('Random Person');
+
+    expect(
+      vm.$el.querySelector('.randPersonBtn').textContent
+    ).to.contain('Random Person');
+
+    expect(
+      vm.$el.querySelectorAll('[name="person-select"]')
+    ).to.have.length(1);
   });
 });
