@@ -1,7 +1,7 @@
 <template>
   <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
     <mdl-button class="randPersonBtn" v-mdl-ripple-effect colored icon raised v-on:click="fetchRandomPerson">
-      <i class="material-icons">face</i> Random
+      <i class="material-icons">face</i> Random Person
     </mdl-button>
     <div class="mdl-card__actions">
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-dirty">
@@ -64,9 +64,6 @@ export default {
   },
   init() {
     person.fetchAll().then((nameList) => {
-      // Unfortunately since we async loaded data,
-      // closing the select menu requires an extra click due to:
-      // https://github.com/posva/vue-mdl/issues/46
       this.nameList = nameList;
     });
   },
