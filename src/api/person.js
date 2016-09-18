@@ -36,7 +36,10 @@ person.fetchPage = (resolve, pageNumber) => {
       const pathSegments = result.url.split('/');
       const id = pathSegments[pathSegments.length - 2];
       personCache[id] = result;
-      nameList.push(result.name);
+      nameList.push({
+        name: result.name,
+        value: id,
+      });
     }
 
     if (response.data.next) {

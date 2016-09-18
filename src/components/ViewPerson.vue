@@ -50,20 +50,27 @@ export default {
       imageShow: false,
       loading: false,
       nameList: [],
+      idForName: undefined,
     };
   },
   init() {
     person.fetchAll().then((nameList) => {
+      // Unfortunately since we async loaded data,
+      // closing the select menu requires an extra click due to:
+      // https://github.com/posva/vue-mdl/issues/46
       this.nameList = nameList;
     });
   },
   methods: {
     fetchRandomPerson() {
+      this.idForName = Math.floor((Math.random() * 87) + 1);
+      this.fetchPerson();
+    },
+    fetchPerson() {
       this.loading = true;
       this.imageShow = false;
       this.personImageMsg = '';
-      const randomPersonId = Math.floor((Math.random() * 87) + 1);
-      person.fetch(randomPersonId).then((personData) => {
+      person.fetch(this.idForName).then((personData) => {
         this.personData = Object.assign(this.personData, personData);
         person.getPicture(this.personData.name).then((data) => {
           this.loading = false;
