@@ -1,11 +1,15 @@
 <template>
-  <div class="mdl-card mdl-shadow--4dp portfolio-card">
+  <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
     <mdl-button class="randPersonBtn" v-mdl-ripple-effect colored icon raised v-on:click="fetchRandomPerson">
       <i class="material-icons">face</i> Random
     </mdl-button>
     <div class="mdl-card__actions">
-      <mdl-select label="Name" id="people-select" class="full-width-select"
-        :value.sync="personData.name" :options="nameList"></mdl-select>
+      <select class="full-width-select" v-model="idForName"
+        v-on:change="fetchPerson">
+        <option v-for="option in nameList" v-bind:value="option.value">
+          {{ option.name }}
+        </option>
+      </select>
       <mdl-textfield floating-label="Height" :value.sync="personData.height"></mdl-textfield>
       <mdl-textfield floating-label="Mass" :value.sync="personData.mass"></mdl-textfield>
       <mdl-textfield floating-label="Hair Color" :value.sync="personData.hair_color"></mdl-textfield>
@@ -101,5 +105,7 @@ figure img {
 }
 .full-width-select {
   width: 100%;
+  font-size: 24px;
+  margin: 3px -2px 8px;
 }
 </style>
