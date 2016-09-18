@@ -4,12 +4,17 @@
       <i class="material-icons">face</i> Random
     </mdl-button>
     <div class="mdl-card__actions">
-      <select class="full-width-select" v-model="idForName"
-        v-on:change="fetchPerson">
-        <option v-for="option in nameList" v-bind:value="option.value">
-          {{ option.name }}
-        </option>
-      </select>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-dirty">
+        <div>
+          <select class="full-width-select" v-model="idForName"
+            v-on:change="fetchPerson">
+            <option v-for="option in nameList" v-bind:value="option.value">
+              {{ option.name }}
+            </option>
+          </select>
+          <label class="mdl-textfield__label">Name</label>
+        </div>
+      </div>
       <mdl-textfield floating-label="Height" :value.sync="personData.height"></mdl-textfield>
       <mdl-textfield floating-label="Mass" :value.sync="personData.mass"></mdl-textfield>
       <mdl-textfield floating-label="Hair Color" :value.sync="personData.hair_color"></mdl-textfield>
